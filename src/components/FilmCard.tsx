@@ -7,14 +7,14 @@ const FilmCard = (props: FilmData) => {
         <img alt='zdj filmu' src={props.img}></img>
         <div className='film-card__description'>
             <span className='film-card__title'>
-                {props.title}
+                Tytuł: {props.title}
             </span>
             <div className='film-card__rating'>
-                {props.rating} / 10
+                Ocena: {props.rating} / 10
             </div>
-            <span className='film-card__short-description'>
-                {props.short_description}
-            </span>
+            <div className='film-card__short-description'>
+                Krótki opis: {props.short_description}
+            </div>
         </div>
     </div>
   )

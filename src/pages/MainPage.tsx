@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Observable } from 'rxjs';
+import React from 'react'
+import { Observable, first } from 'rxjs';
 import data from '../assets/data'
 import FilmCard from '../components/FilmCard';
+import Search from '../components/Search';
 import FilmData from '../models/FilmData';
 
 const MainPage = () => {
@@ -9,16 +10,27 @@ const MainPage = () => {
   let itemsList: FilmData[] = [];
 
 
-  dataInfo.subscribe(data => {
+  dataInfo.pipe(first()).subscribe(data => {
     itemsList = data;
   })
 
 
   return (
     <div className="main-page">
-      {
-        itemsList.map((item: FilmData, id) => <FilmCard key={id} img={item.img} title={item.title} rating={item.rating} short_description={item.short_description}/>
-      )}
+      <div className='main-page__search'>
+        <div className='main-page__search-title'>
+          Znajdź film który cię interesuje: 
+        </div>
+        <Search />
+      </div>
+      <div>
+        Lista filmów
+      </div>
+      <div className='main-page__film-cards'>
+        {
+          itemsList.map((item: FilmData, id) => <FilmCard key={id} img={item.img} title={item.title} rating={item.rating} short_description={item.short_description}/>
+        )}
+      </div>
     </div>
   )
 }
