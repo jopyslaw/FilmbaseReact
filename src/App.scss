@@ -11,7 +11,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
   bottom: 0;
   left: 0;
 
@@ -70,6 +70,7 @@ body {
   align-items: center;
   flex-direction: column;
   min-height: calc(100vh - 50px);
+  margin-bottom: 50px;
 
   &__search {
     margin-top: 30px;
@@ -168,6 +169,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 
   &__container {
     width: 100%;
@@ -258,9 +260,17 @@ body {
   margin-top: 50px;
   margin-bottom: 40px;
   display: flex;
-  height: 75vh;
+  margin-bottom: 50px;
+
   justify-content: center;
   align-items: center;
+
+  &__container {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &--text {
     text-align: center;
