@@ -1,5 +1,6 @@
 import React from "react";
 import FilmData from "../models/FilmData";
+import { Link } from "react-router-dom";
 
 const FilmCard = (props: FilmData) => {
   return (
@@ -10,6 +11,13 @@ const FilmCard = (props: FilmData) => {
         <div className="film-card__rating">Ocena: {props.rating} / 10</div>
         <div className="film-card__short-description">
           Krótki opis: {props.short_description}
+          <Link
+            to="details/1"
+            style={{ textDecoration: "none", color: "gold" }}
+          >
+            {" "}
+            Wyświetl szczegóły filmu
+          </Link>
         </div>
       </div>
     </div>

@@ -16,6 +16,13 @@ const Navbar = () => {
       </div>
       <div className="navbar__buttons">
         <Link
+          to="/add"
+          style={{ textDecoration: "none", color: "white" }}
+          className="navbar__button"
+        >
+          Dodaj nowy film
+        </Link>
+        <Link
           to="/signup"
           style={{ textDecoration: "none", color: "white" }}
           className="navbar__button"
