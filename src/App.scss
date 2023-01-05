@@ -1,24 +1,24 @@
-@use '../src/assets/styles/variables.scss' as *;
+@use "../src/assets/styles/variables.scss" as *;
 
 body {
-    background-color: #f5bd05;
+  background-color: #f5bd05;
 }
 
 .footer {
-    width: 100%;
-    min-height: 50px;
-    background-color: $main-color-first;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    bottom: 0;
-    left: 0;
-    
-    &__text {
-        font-family: 'Codec Pro';
-        color: $main-font-color;
-    }
+  width: 100%;
+  min-height: 50px;
+  background-color: $main-color-first;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  &__text {
+    font-family: "Codec Pro";
+    color: $main-font-color;
+  }
 }
 
 .navbar {
@@ -31,35 +31,34 @@ body {
   color: $main-font-color;
 
   &__logo {
-      margin-left: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &--text {
-          font-size: 18px;
-          margin-left: 10px;
-      }
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &--text {
+      font-size: 18px;
+      margin-left: 10px;
+    }
   }
 
   &__buttons {
-      margin-right: 20px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      gap: 25px;
-
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 25px;
   }
 
   &__button {
-      font-size: 18px;
-      transition-duration: 0.4s;
+    font-size: 18px;
+    transition-duration: 0.4s;
   }
 
   &__button:hover {
-      text-decoration: none !important;
-      color: $main-color-second !important;
-      cursor: pointer;
+    text-decoration: none !important;
+    color: $main-color-second !important;
+    cursor: pointer;
   }
 }
 
@@ -71,7 +70,8 @@ body {
   align-items: center;
   flex-direction: column;
   min-height: calc(100vh - 50px);
-  
+  margin-bottom: 50px;
+
   &__search {
     margin-top: 30px;
     margin-bottom: 20px;
@@ -93,75 +93,249 @@ body {
     font-size: 30px;
     margin-bottom: 10px;
   }
-
 }
 
 .film-card {
-    display: flex;
-    flex-direction: row;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    min-height: 250px;
-    width: 90%;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  min-height: 250px;
+  width: 90%;
+  gap: 20px;
 
-    &__title {
-        font-size: 30px;
-    }
+  &__title {
+    font-size: 30px;
+  }
 
-    &__rating {
-        margin-top: 20px;
-        font-size: 22px;
-    }
+  &__rating {
+    margin-top: 20px;
+    font-size: 22px;
+  }
 
-    &__short_description {
-        margin-top: 20px;
-        font-size: 15px;
-    }
+  &__short_description {
+    margin-top: 20px;
+    font-size: 15px;
+  }
 }
 
 .search {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  &__container {
     width: 100%;
     display: flex;
     flex-direction: row;
+    gap: 10px;
+  }
 
-    &__container {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
+  &__form {
+    width: 100%;
+  }
+
+  &__input-field {
+    border-radius: 20px;
+    width: 100%;
+    min-height: 35px;
+    border: none;
+    padding-left: 20px;
+  }
+
+  &__label {
+    text-align: center;
+    width: 100%;
+  }
+
+  &__button {
+    border-radius: 20px;
+    min-height: 40px;
+    min-width: 80px;
+    border: none;
+    cursor: pointer;
+    transition-duration: 0.5s;
+  }
+
+  &__button:hover {
+    background-color: black;
+    color: #f5bd05;
+  }
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+
+  &__container {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    //background-image: url("../../../assets/img/tlo-log.png");
+    z-index: -1;
+    height: 87vh;
+    width: 100%;
+  }
+
+  &__form {
+    background-color: $black-font-color;
+    padding: 20px;
+    border: 5px solid $main-font-color;
+    border-radius: 30px;
+    min-height: 250px;
+    width: 350px;
+
+    &--text {
+      color: $main-font-color;
+      text-align: center;
+      font-size: 30px;
     }
 
-    &__form {
-        width: 100%;
+    &--style {
+      margin-top: 30px;
+      color: $main-font-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      gap: 20px;
     }
 
-    &__input-field {
-        border-radius: 20px;
-        width: 100%;
-        min-height: 35px;
-        border: none;
-        padding-left: 20px;
+    &--width {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 15px;
     }
 
-    &__label {
-        text-align: center;
-        width: 100%;
+    &--label {
+      font-size: 15px;
+    }
+  }
+
+  .input-field {
+    border-radius: 20px;
+    width: 100%;
+    height: 40px;
+    padding: 2px;
+  }
+
+  .btn-style {
+    border-radius: 20px;
+    height: 50px;
+    width: 100px;
+    background-color: $main-color-second;
+    color: $black-font-color;
+  }
+
+  .field-width {
+    width: 70%;
+  }
+}
+
+.validator {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  &--color {
+    color: red;
+  }
+}
+
+.register-page {
+  margin-top: 50px;
+  margin-bottom: 40px;
+  display: flex;
+  margin-bottom: 50px;
+
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--text {
+    text-align: center;
+    font-size: 35px;
+    margin-bottom: 20px;
+  }
+
+  &__form {
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: $black-font-color;
+    color: $main-font-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    &--flex {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
     }
 
-    &__button {
-        border-radius: 20px;
-        min-height: 40px;
-        min-width: 80px;
-        border: none;
-        cursor: pointer;
-        transition-duration: 0.5s;
+    &--label {
+      font-size: 15px;
     }
 
-    &__button:hover {
-        background-color: black;
-        color: #f5bd05;
+    &--margin {
+      margin-top: 10px;
     }
+
+    &--half-width {
+      width: 50%;
+    }
+  }
+
+  &__register-btn {
+    min-width: 100px;
+    min-height: 60px;
+    border: 1px solid $main-color-second;
+    border-radius: 40px;
+    background-color: $main-color-second;
+    text-align: center;
+    color: $black-font-color;
+  }
+
+  &__clear-btn {
+    min-width: 100px;
+    min-height: 60px;
+    border: 1px solid #ff3c5f;
+    border-radius: 40px;
+    background-color: #ff3c5f;
+    text-align: center;
+    color: $main-font-color;
+    margin-left: 20px;
+  }
+}
+
+.input-style {
+  border-radius: 15px;
+  min-width: 250px;
+  height: 40px;
+  padding: 2px;
+  border: none;
+  margin-top: 5px;
 }
