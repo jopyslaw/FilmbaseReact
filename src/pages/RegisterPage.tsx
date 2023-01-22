@@ -1,21 +1,34 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const nav = useNavigate();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     const data = {
       name,
-      username,
       email,
       password,
     };
+    axios({
+      method: "post",
+      url: "https://at.usermd.net/api/user/create",
+      data: data,
+    })
+      .then((response) => {
+        console.log(response);
+        nav("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log("register", data);
   };
 
@@ -39,29 +52,8 @@ const RegisterPage = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
                 <br />
-                {/*<div className="validator">
-                        <span className="validator--color">To pole nie może być puste</span>
-                    </div>*/}
                 <br />
               </div>
-            </div>
-            <div className="register-page__form--margin">
-              <label className="register-page__form--label" htmlFor="username">
-                Podaj nazwę użtykownika
-              </label>
-              <br />
-              <input
-                type="text"
-                className="input-style"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              {/*<div className="validator">
-              <span className="validator--color">
-                To pole nie może być puste
-              </span>
-                </div>*/}
             </div>
             <div className="register-page__form--margin">
               <label className="register-page__form--label" htmlFor="email">
@@ -75,14 +67,6 @@ const RegisterPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {/*<div className="validator">
-              <span className="validator--color">
-                To pole nie może być puste
-              </span>
-              <span className="validator--color">
-                Podany adres e-mail jest nieprawidłowy
-              </span>
-              </div>*/}
             </div>
             <div className="register-page__form--flex register-page__form--margin">
               <div className="register-page__form--half-width">
@@ -100,15 +84,6 @@ const RegisterPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {/*<div className="validator">
-                <span className="validator--color">
-                  To pole nie może być puste
-                </span>
-                <span className="validator--color">
-                  Podane hasło musi zawierać minimum 8 znaków, jedną dużą
-                  literę, jedną małą literę, jedną liczbę i jeden znak specjalny
-                </span>
-            </div>*/}
               </div>
               <div className="register-page__form--half-width">
                 <label
@@ -125,15 +100,6 @@ const RegisterPage = () => {
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
-                {/*<div className="validator">
-                <span className="validator--color">
-                  To pole nie może być puste
-                </span>
-                <span className="validator--color">
-                  Podane hasło musi zawierać minimum 8 znaków, jedną dużą
-                  literę, jedną małą literę, jedną liczbę i jeden znak specjalny
-                </span>
-              </div>*/}
               </div>
             </div>
             <div className="register-page__form--margin">
