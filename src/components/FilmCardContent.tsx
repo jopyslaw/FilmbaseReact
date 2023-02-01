@@ -1,11 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { decodeToken } from "react-jwt";
 import { useParams } from "react-router-dom";
-import FilmData from "../models/FilmData";
+import { FilmData } from "../models/FilmData";
 
 const FilmCardContent = () => {
   const [film, setFilm] = useState<FilmData>();
   const { id } = useParams();
+  const token: string | null = localStorage.getItem("token");
+  const isLogged: any = decodeToken(token || ""); //TODO:
+  const isAdmin: string = isLogged.role;
+
+  const handleDelete = () => {
+    axios({
+      method: "delete",
+      url: `https://at.usermd.net/api/movie/${id}`,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getFilmData();

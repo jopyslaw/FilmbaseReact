@@ -1,18 +1,20 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { RegisterModel } from "../models/AuthData";
 
 const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const nav = useNavigate();
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [repeatPassword, setRepeatPassword] = useState<string>("");
+  const nav: NavigateFunction = useNavigate();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const data = {
+    const data: RegisterModel = {
       name,
       email,
       password,
@@ -22,12 +24,21 @@ const RegisterPage = () => {
       url: "https://at.usermd.net/api/user/create",
       data: data,
     })
-      .then((response) => {
-        console.log(response);
+      .then((response: AxiosResponse) => {
         nav("/");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error: any) => {
+        toast.error(error.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          toastId: "Error1",
+        });
       });
     console.log("register", data);
   };

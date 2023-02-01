@@ -69,7 +69,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 50px);
   margin-bottom: 50px;
 
   &__search {
@@ -103,8 +102,13 @@ body {
   border: none;
   border-radius: 20px;
   min-height: 250px;
-  width: 90%;
+  min-width: 90vw;
   gap: 20px;
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     font-size: 30px;
@@ -118,6 +122,13 @@ body {
   &__short_description {
     margin-top: 20px;
     font-size: 15px;
+  }
+
+  &__delete-btn {
+    border-radius: 30px;
+    background-color: red;
+    color: white;
+    align-self: flex-end;
   }
 }
 

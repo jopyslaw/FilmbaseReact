@@ -1,5 +1,4 @@
 import { of } from "rxjs";
-import FilmData from "../models/FilmData";
 
 /*const data: FilmData[] = [
   {

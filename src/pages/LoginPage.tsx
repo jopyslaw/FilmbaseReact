@@ -1,15 +1,17 @@
 import React, { FormEvent, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { LoginModel } from "../models/AuthData";
 
 const LoginPage = () => {
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const nav = useNavigate();
+  const [login, setLogin] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const nav: NavigateFunction = useNavigate();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const data = {
+    const data: LoginModel = {
       login,
       password,
     };
@@ -18,15 +20,23 @@ const LoginPage = () => {
       url: "https://at.usermd.net/api/user/auth",
       data: data,
     })
-      .then((response) => {
-        console.log(response);
+      .then((response: AxiosResponse) => {
         localStorage.setItem("token", response.data.token);
         nav("/");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error: any) => {
+        toast.error(error.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          toastId: "Error1",
+        });
       });
-    console.log("data was send:", data);
   };
 
   return (

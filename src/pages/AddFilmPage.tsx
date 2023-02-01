@@ -1,5 +1,7 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { AddFilm } from "../models/FilmData";
 
 const AddFilmPage = () => {
   const [title, setTitle] = useState("");
@@ -7,7 +9,7 @@ const AddFilmPage = () => {
   const [content, setContent] = useState("");
 
   const handleSubmit = () => {
-    const obj = {
+    const obj: AddFilm = {
       title,
       image: img,
       content,
@@ -17,10 +19,22 @@ const AddFilmPage = () => {
       url: "https://at.usermd.net/api/movies",
       data: obj,
     })
-      .then((response) => {
+      .then((response: AxiosResponse) => {
         console.log(response);
       })
-      .catch((error) => console.log(error));
+      .catch((error: any) =>
+        toast.error(error.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          toastId: "Error1",
+        })
+      );
   };
 
   return (

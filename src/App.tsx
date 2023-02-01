@@ -14,6 +14,7 @@ import AddFilmPage from "./pages/AddFilmPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { isExpired } from "react-jwt";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -38,6 +39,18 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
