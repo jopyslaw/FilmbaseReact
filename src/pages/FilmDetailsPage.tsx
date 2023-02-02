@@ -4,6 +4,7 @@ import { decodeToken } from "react-jwt";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FilmData } from "../models/FilmData";
+import { useNavigate } from "react-router-dom";
 
 const FilmDetailsPage = () => {
   const [film, setFilm] = useState<FilmData>();
@@ -11,6 +12,7 @@ const FilmDetailsPage = () => {
   const token = localStorage.getItem("token");
   const isLogged: any = decodeToken(token || "");
   const isAdmin = isLogged?.role;
+  const nav = useNavigate();
 
   const handleDelete = () => {
     axios({
@@ -18,7 +20,7 @@ const FilmDetailsPage = () => {
       url: `https://at.usermd.net/api/movie/${id}`,
     })
       .then((response) => {
-        console.log(response);
+        nav("/");
       })
       .catch((error) =>
         toast.error(error.response.data, {
@@ -67,13 +69,19 @@ const FilmDetailsPage = () => {
   return (
     <div className="film-details-page">
       <div className="film-card">
-        <img alt="zdj filmu" src={film?.image}></img>
+        <img
+          alt="zdj filmu"
+          src={film?.image}
+          width="auto"
+          height="250px"
+        ></img>
+
         <div className="film-card__description">
           <span className="film-card__title">Tytuł: {film?.title}</span>
           <div className="film-card__short-description">{film?.content}</div>
           {isAdmin === "admin" && (
             <button className="film-card__delete-btn" onClick={handleDelete}>
-              Delete Film
+              Usuń film
             </button>
           )}
         </div>

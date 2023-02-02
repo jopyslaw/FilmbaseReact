@@ -125,10 +125,14 @@ body {
   }
 
   &__delete-btn {
-    border-radius: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
     background-color: red;
     color: white;
-    align-self: flex-end;
+    align-self: flex-start;
+    cursor: pointer;
   }
 }
 

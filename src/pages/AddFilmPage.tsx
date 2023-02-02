@@ -1,14 +1,17 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { AddFilm } from "../models/FilmData";
+import { useNavigate } from "react-router-dom";
 
 const AddFilmPage = () => {
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
   const [content, setContent] = useState("");
+  const nav = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     const obj: AddFilm = {
       title,
       image: img,
@@ -20,7 +23,7 @@ const AddFilmPage = () => {
       data: obj,
     })
       .then((response: AxiosResponse) => {
-        console.log(response);
+        nav("/");
       })
       .catch((error: any) =>
         toast.error(error.response.data, {
