@@ -69,7 +69,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 50px);
   margin-bottom: 50px;
 
   &__search {
@@ -103,8 +102,13 @@ body {
   border: none;
   border-radius: 20px;
   min-height: 250px;
-  width: 90%;
+  min-width: 90vw;
   gap: 20px;
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     font-size: 30px;
@@ -118,6 +122,17 @@ body {
   &__short_description {
     margin-top: 20px;
     font-size: 15px;
+  }
+
+  &__delete-btn {
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    align-self: flex-start;
+    cursor: pointer;
   }
 }
 
@@ -338,4 +353,11 @@ body {
   padding: 2px;
   border: none;
   margin-top: 5px;
+}
+
+.film-details-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
 }

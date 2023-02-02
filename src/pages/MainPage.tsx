@@ -1,24 +1,69 @@
-import React, { useState } from "react";
-import { Observable, first } from "rxjs";
-import data from "../assets/data";
+import React, { useEffect, useState } from "react";
 import FilmCard from "../components/FilmCard";
 import Search from "../components/Search";
-import FilmData from "../models/FilmData";
+import { FilmData } from "../models/FilmData";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 const MainPage = () => {
-  let dataInfo: Observable<FilmData[]> = data;
-  let itemsList: FilmData[] = [];
-  const [searchPhrase, setSearchPhrase] = useState("");
+  const [itemList, setItemList] = useState<FilmData[]>([]);
 
-  dataInfo.pipe(first()).subscribe((data) => {
-    itemsList = data;
-  });
+  useEffect(() => {
+    getItems();
+  }, []);
 
   const sendToChild = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     phrase: string
   ): void => {
-    setSearchPhrase(phrase);
+    event.preventDefault();
+    axios({
+      method: "get",
+      url: "https://at.usermd.net/api/movies",
+    })
+      .then((response) => {
+        const filteredFilms: FilmData[] = response.data.filter(
+          (filmData: FilmData) =>
+            filmData.title.toLowerCase().includes(phrase.toLowerCase())
+        );
+        setItemList(filteredFilms);
+      })
+      .catch((error) =>
+        toast.error(error.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          toastId: "Error1",
+        })
+      );
+  };
+
+  const getItems = (): void => {
+    axios({
+      method: "get",
+      url: "https://at.usermd.net/api/movies",
+    })
+      .then((response: AxiosResponse) => {
+        setItemList(response.data);
+      })
+      .catch((error: any) => {
+        toast.error(error.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          toastId: "Error1",
+        });
+      });
   };
 
   return (
@@ -31,13 +76,14 @@ const MainPage = () => {
       </div>
       <div>Lista filmów</div>
       <div className="main-page__film-cards">
-        {itemsList.map((item: FilmData, id) => (
+        {itemList.map((item: FilmData) => (
           <FilmCard
-            key={id}
-            img={item.img}
+            key={item.id}
+            image={item.image}
             title={item.title}
             rating={item.rating}
-            short_description={item.short_description}
+            content={item.content}
+            id={item.id}
           />
         ))}
       </div>

@@ -1,12 +1,11 @@
 import { of } from "rxjs";
-import FilmData from "../models/FilmData";
 
-const data: FilmData[] = [
+/*const data: FilmData[] = [
   {
-    img: "https://fwcdn.pl/fpo/08/62/862/7517878.6.jpg",
+    image: "https://fwcdn.pl/fpo/08/62/862/7517878.6.jpg",
     title: "Zielona mila",
     rating: "8.6",
-    short_description:
+    content:
       "Emerytowany strażnik więzienny opowiada przyjaciółce o niezwykłym mężczyźnie, którego skazano na śmierć za zabójstwo dwóch 9-letnich dziewczynek.",
   },
   {
@@ -60,4 +59,4 @@ const data: FilmData[] = [
   },
 ];
 
-export default of(data);
+export default of(data);*/

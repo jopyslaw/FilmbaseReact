@@ -1,21 +1,45 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
+import axios, { AxiosResponse } from "axios";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { RegisterModel } from "../models/AuthData";
 
 const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [repeatPassword, setRepeatPassword] = useState<string>("");
+  const nav: NavigateFunction = useNavigate();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const data = {
+    const data: RegisterModel = {
       name,
-      username,
       email,
       password,
     };
+    axios({
+      method: "post",
+      url: "https://at.usermd.net/api/user/create",
+      data: data,
+    })
+      .then((response: AxiosResponse) => {
+        nav("/");
+      })
+      .catch((error: any) => {
+        toast.error(error.response.data, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          toastId: "Error1",
+        });
+      });
     console.log("register", data);
   };
 
@@ -39,29 +63,8 @@ const RegisterPage = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
                 <br />
-                {/*<div className="validator">
-                        <span className="validator--color">To pole nie może być puste</span>
-                    </div>*/}
                 <br />
               </div>
-            </div>
-            <div className="register-page__form--margin">
-              <label className="register-page__form--label" htmlFor="username">
-                Podaj nazwę użtykownika
-              </label>
-              <br />
-              <input
-                type="text"
-                className="input-style"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              {/*<div className="validator">
-              <span className="validator--color">
-                To pole nie może być puste
-              </span>
-                </div>*/}
             </div>
             <div className="register-page__form--margin">
               <label className="register-page__form--label" htmlFor="email">
@@ -75,14 +78,6 @@ const RegisterPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {/*<div className="validator">
-              <span className="validator--color">
-                To pole nie może być puste
-              </span>
-              <span className="validator--color">
-                Podany adres e-mail jest nieprawidłowy
-              </span>
-              </div>*/}
             </div>
             <div className="register-page__form--flex register-page__form--margin">
               <div className="register-page__form--half-width">
@@ -100,15 +95,6 @@ const RegisterPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {/*<div className="validator">
-                <span className="validator--color">
-                  To pole nie może być puste
-                </span>
-                <span className="validator--color">
-                  Podane hasło musi zawierać minimum 8 znaków, jedną dużą
-                  literę, jedną małą literę, jedną liczbę i jeden znak specjalny
-                </span>
-            </div>*/}
               </div>
               <div className="register-page__form--half-width">
                 <label
@@ -125,15 +111,6 @@ const RegisterPage = () => {
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
-                {/*<div className="validator">
-                <span className="validator--color">
-                  To pole nie może być puste
-                </span>
-                <span className="validator--color">
-                  Podane hasło musi zawierać minimum 8 znaków, jedną dużą
-                  literę, jedną małą literę, jedną liczbę i jeden znak specjalny
-                </span>
-              </div>*/}
               </div>
             </div>
             <div className="register-page__form--margin">

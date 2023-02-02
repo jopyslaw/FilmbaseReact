@@ -6,7 +6,7 @@ const Search = (props: {
     phrase: string
   ) => void;
 }) => {
-  const [phrase, setPhrase] = useState("");
+  const [phrase, setPhrase] = useState<string>("");
 
   return (
     <div className="search">
